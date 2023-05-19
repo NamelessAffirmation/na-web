@@ -5,6 +5,7 @@
   "scripts": {
     "start": "npm run serve:local",
     "serve:local": "NODE_ENV=development npx tsc-watch --outDir ./dist --onSuccess \"node -r dotenv/config ./dist/main.js\"",
+    "serve:prod": "node ./dist/main.js",
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf dist",
     "compile": "npx tsc"

@@ -11,7 +11,9 @@ export class HealthAPIController extends BaseController {
 
   private health(_req: Request, res: Response, next: NextFunction): void {
     try {
-      res.status(200).send("ok");
+      res.status(200).send({
+        status: "ok"
+      });
     } catch (error: any) {
       next(error);
     }
