@@ -28,8 +28,9 @@ func LoadRouters() *chi.Mux {
 	FileServer(r, "/public", filesDir)
 
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
+
 		// Parse the HTML template
-		tmpl, err := template.ParseFiles("views/index.html")
+		tmpl, err := template.ParseFiles("views/index.html", "views/layout.html")
 		if err != nil {
 			http.Error(w, "Unable to load template", http.StatusInternalServerError)
 			return
@@ -42,7 +43,8 @@ func LoadRouters() *chi.Mux {
 		}
 
 		// Execute the template with data
-		if err := tmpl.Execute(w, data); err != nil {
+		
+		if err := tmpl.ExecuteTemplate(w, "base", data); err != nil {
 			http.Error(w, "Unable to execute template", http.StatusInternalServerError)
 		}
 	})
